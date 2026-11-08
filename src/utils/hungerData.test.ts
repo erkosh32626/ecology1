@@ -33,9 +33,18 @@ test('global statistics match exact Kazakh indicators (735M, 1/3, 3.1B)', () => 
   assert.equal(GLOBAL_STATS[2].value, '3.1 миллиард адам');
 });
 
-test('all 4 causes, 3 geographic danger regions, and 4 solution directions are complete', () => {
+test('all 4 causes, 3 geographic danger regions with real GIS coordinates/polygons, and 4 solution directions are complete', () => {
   assert.equal(CAUSE_BLOCKS.length, 4);
   assert.equal(DANGER_REGIONS.length, 3);
+  for (const region of DANGER_REGIONS) {
+    assert.equal(region.mapCenter.length, 2);
+    assert.ok(region.countryPins.length >= 3);
+    for (const pin of region.countryPins) {
+      assert.ok(pin.lat >= -90 && pin.lat <= 90);
+      assert.ok(pin.lng >= -180 && pin.lng <= 180);
+      assert.ok(pin.polygon.length >= 5);
+    }
+  }
   assert.equal(SOLUTION_DIRECTIONS.length, 4);
   assert.ok(CONCLUSION_CONTENT.quote.includes('әділ экономика құру'));
 });

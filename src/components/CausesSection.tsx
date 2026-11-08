@@ -16,11 +16,11 @@ export const CausesSection: React.FC = () => {
             key={cause.id}
             id={cause.id}
             aria-labelledby={`${cause.id}-heading`}
-            className="relative w-full min-h-screen py-24 md:py-32 px-6 md:px-12 flex items-center justify-center border-t border-white/10 bg-[#0a0608]"
+            className="relative w-full lg:h-screen lg:max-h-screen py-16 lg:py-0 lg:pt-20 lg:pb-8 px-6 md:px-12 xl:pr-20 flex items-center justify-center border-t border-white/10 bg-[#0a0608] overflow-hidden"
           >
-            <div className="max-w-6xl w-full mx-auto">
+            <div className="max-w-6xl w-full mx-auto flex flex-col justify-center h-full max-h-[780px]">
               {/* Top Metadata Row */}
-              <div className="flex flex-wrap items-center justify-between gap-4 pb-8 border-b border-white/10">
+              <div className="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-white/10 shrink-0">
                 <div className="flex items-center gap-2 text-xs text-white/60">
                   <span className="font-mono tabular-nums">
                     0{cause.blockNumber} / 09
@@ -39,26 +39,26 @@ export const CausesSection: React.FC = () => {
               </div>
 
               {/* Main Split Layout */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 mt-12 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 mt-8 items-center">
                 {/* Left Column: Block Heading & Summary */}
-                <div className="lg:col-span-5 space-y-6">
+                <div className="lg:col-span-5 space-y-4">
                   <p className="text-xs tracking-wider text-white/55">
                     0{cause.causeIndex}. НЕГІЗГІ СЕБЕП
                   </p>
                   <h2
                     id={`${cause.id}-heading`}
                     style={{ textWrap: 'balance' }}
-                    className="font-instrument text-white text-4xl sm:text-5xl leading-[1.08] tracking-tight"
+                    className="font-instrument text-white text-3xl sm:text-4xl lg:text-5xl leading-[1.06] tracking-tight"
                   >
                     {cause.title}
                   </h2>
-                  <p className="text-white/70 text-base leading-relaxed">
+                  <p className="text-white/70 text-sm lg:text-base leading-relaxed">
                     {cause.summary}
                   </p>
 
                   {isFoodWasteBlock && (
                     <div className="pt-2">
-                      <p className="text-xs text-white/50 mb-2.5">
+                      <p className="text-xs text-white/50 mb-2">
                         Аймақтық салыстыру сүзгісі:
                       </p>
                       <div className="inline-flex items-center gap-1 p-1 bg-white/[0.06] rounded-lg border border-white/10">
@@ -101,8 +101,8 @@ export const CausesSection: React.FC = () => {
                 </div>
 
                 {/* Right Column: Theses Cards */}
-                <div className="lg:col-span-7 space-y-5">
-                  <div className="text-xs text-white/55 mb-2">
+                <div className="lg:col-span-7 space-y-4">
+                  <div className="text-xs text-white/55 mb-1">
                     Негізгі тезистер
                   </div>
                   {cause.theses
@@ -116,11 +116,11 @@ export const CausesSection: React.FC = () => {
                     .map((thesis, idx) => (
                       <article
                         key={thesis.title}
-                        className="rounded-2xl p-6 md:p-8 liquid-glass transition-all duration-300 hover:bg-white/[0.05]"
+                        className="rounded-2xl p-5 lg:p-6 liquid-glass transition-all duration-300 hover:bg-white/[0.05]"
                       >
-                        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-3">
-                          <h3 className="text-xl md:text-2xl font-medium text-white">
-                            <span className="font-mono tabular-nums text-white/45 text-base mr-2.5">
+                        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
+                          <h3 className="text-lg md:text-xl font-medium text-white">
+                            <span className="font-mono tabular-nums text-white/45 text-sm mr-2">
                               0{idx + 1}.
                             </span>
                             {thesis.title}
@@ -129,7 +129,7 @@ export const CausesSection: React.FC = () => {
                             {thesis.metricHighlight}
                           </span>
                         </div>
-                        <p className="text-white/80 text-base leading-relaxed">
+                        <p className="text-white/80 text-sm lg:text-base leading-relaxed">
                           {thesis.description}
                         </p>
                       </article>

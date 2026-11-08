@@ -69,3 +69,43 @@ body {
 .button-glow {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.1);
 }
+
+/* Custom Leaflet dark theme styling */
+.leaflet-container {
+  background: #060911 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: rgba(12, 10, 16, 0.95) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+}
+
+.leaflet-tooltip.crisis-country-tooltip {
+  background: rgba(10, 6, 8, 0.92) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(251, 191, 36, 0.55) !important;
+  border-radius: 6px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55) !important;
+}
+
+.leaflet-tooltip.crisis-country-tooltip::before {
+  border-top-color: rgba(251, 191, 36, 0.55) !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(10, 6, 8, 0.7) !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+  font-size: 10px !important;
+}
+
+.leaflet-control-attribution a {
+  color: rgba(255, 255, 255, 0.65) !important;
+}

@@ -36,6 +36,17 @@ export interface CauseBlock {
   keyIndicatorValue: string;
 }
 
+export interface DangerCountryPin {
+  name: string;
+  capital: string;
+  lat: number;
+  lng: number;
+  acuteMillions: string;
+  ipcPhase: string;
+  mainDriver: string;
+  polygon: Array<[number, number]>;
+}
+
 export interface DangerRegion {
   id: 'africa' | 'middle-east-asia' | 'central-america-caribbean';
   title: string;
@@ -44,15 +55,10 @@ export interface DangerRegion {
   affectedMillions: number;
   severityLevel: string;
   primaryDrivers: string[];
-  coordinates: { cx: number; cy: number; rx: number; ry: number };
-  countryPins: Array<{
-    name: string;
-    x: number;
-    y: number;
-    acuteMillions: string;
-    labelDx: number;
-    labelDy: number;
-  }>;
+  mapCenter: [number, number];
+  mapZoom: number;
+  accentHex: string;
+  countryPins: DangerCountryPin[];
 }
 
 export interface SolutionDirection {
@@ -306,11 +312,63 @@ export const DANGER_REGIONS: DangerRegion[] = [
     affectedMillions: 282,
     severityLevel: 'Төтенше (IPC 4–5 деңгейі)',
     primaryDrivers: ['Көпжылдық құрғақшылық', 'Қарулы қақтығыстар', 'Босқындар легі'],
-    coordinates: { cx: 535, cy: 265, rx: 85, ry: 72 },
+    mapCenter: [11.5, 31.5],
+    mapZoom: 4,
+    accentHex: '#f59e0b',
     countryPins: [
-      { name: 'Судан', x: 548, y: 228, acuteMillions: '25.6 млн', labelDx: 10, labelDy: -22 },
-      { name: 'Сомали', x: 590, y: 278, acuteMillions: '6.9 млн', labelDx: 10, labelDy: -11 },
-      { name: 'Чад', x: 495, y: 248, acuteMillions: '5.7 млн', labelDx: -126, labelDy: -11 },
+      {
+        name: 'Судан',
+        capital: 'Хартум',
+        lat: 15.5007,
+        lng: 32.5599,
+        acuteMillions: '25.6 млн',
+        ipcPhase: 'IPC 4–5 (Апатты)',
+        mainDriver: 'Қарулы қақтығыс және ауыл шаруашылығының тоқтауы',
+        polygon: [
+          [22.0, 25.0],
+          [22.0, 36.8],
+          [18.0, 38.5],
+          [14.0, 36.2],
+          [10.0, 34.0],
+          [9.5, 24.0],
+          [15.5, 22.8],
+        ],
+      },
+      {
+        name: 'Сомали',
+        capital: 'Могадишо',
+        lat: 2.0469,
+        lng: 45.3182,
+        acuteMillions: '6.9 млн',
+        ipcPhase: 'IPC 4 (Төтенше)',
+        mainDriver: 'Көпжылдық құрғақшылық пен ішкі тұрақсыздық',
+        polygon: [
+          [11.5, 43.2],
+          [11.9, 51.3],
+          [4.5, 48.0],
+          [-1.6, 41.5],
+          [4.0, 41.8],
+          [8.0, 47.0],
+          [9.5, 44.0],
+        ],
+      },
+      {
+        name: 'Чад',
+        capital: 'Нджамена',
+        lat: 12.1348,
+        lng: 15.0557,
+        acuteMillions: '5.7 млн',
+        ipcPhase: 'IPC 4 (Төтенше)',
+        mainDriver: 'Сахель құрғақшылығы және босқындар дағдарысы',
+        polygon: [
+          [23.4, 15.8],
+          [19.5, 24.0],
+          [11.0, 22.5],
+          [7.5, 18.5],
+          [9.8, 14.2],
+          [14.5, 13.6],
+        ],
+      },
     ],
   },
   {
@@ -321,11 +379,60 @@ export const DANGER_REGIONS: DangerRegion[] = [
     affectedMillions: 68,
     severityLevel: 'Дағдарыстық (IPC 3–4 деңгейі)',
     primaryDrivers: ['Гуманитарлық блокада', 'Инфрақұрылымның қирауы', 'Валюта құнсыздануы'],
-    coordinates: { cx: 625, cy: 190, rx: 80, ry: 52 },
+    mapCenter: [26.0, 52.0],
+    mapZoom: 4,
+    accentHex: '#f43f5e',
     countryPins: [
-      { name: 'Йемен', x: 592, y: 226, acuteMillions: '17.6 млн', labelDx: 10, labelDy: -11 },
-      { name: 'Сирия', x: 558, y: 170, acuteMillions: '12.9 млн', labelDx: -128, labelDy: -14 },
-      { name: 'Ауғанстан', x: 658, y: 185, acuteMillions: '15.8 млн', labelDx: 10, labelDy: -14 },
+      {
+        name: 'Йемен',
+        capital: 'Сана',
+        lat: 15.3694,
+        lng: 44.191,
+        acuteMillions: '17.6 млн',
+        ipcPhase: 'IPC 4 (Төтенше)',
+        mainDriver: 'Сауда блокадасы және ұзаққа созылған соғыс',
+        polygon: [
+          [17.5, 43.2],
+          [19.0, 52.0],
+          [16.5, 53.1],
+          [12.6, 43.5],
+          [15.0, 42.8],
+        ],
+      },
+      {
+        name: 'Ауғанстан',
+        capital: 'Кабул',
+        lat: 34.5553,
+        lng: 69.2075,
+        acuteMillions: '15.8 млн',
+        ipcPhase: 'IPC 3–4 (Дағдарыс)',
+        mainDriver: 'Экономикалық оқшаулану және қуаңшылық',
+        polygon: [
+          [37.2, 65.5],
+          [37.0, 71.5],
+          [34.0, 70.5],
+          [29.5, 66.0],
+          [29.8, 61.0],
+          [35.2, 61.2],
+        ],
+      },
+      {
+        name: 'Сирия',
+        capital: 'Дамаск',
+        lat: 33.5138,
+        lng: 36.2765,
+        acuteMillions: '12.9 млн',
+        ipcPhase: 'IPC 3–4 (Дағдарыс)',
+        mainDriver: 'Инфрақұрылымның қирауы және гиперинфляция',
+        polygon: [
+          [37.0, 36.6],
+          [37.1, 42.3],
+          [34.2, 41.0],
+          [32.3, 36.8],
+          [33.3, 35.8],
+          [35.8, 35.8],
+        ],
+      },
     ],
   },
   {
@@ -336,11 +443,58 @@ export const DANGER_REGIONS: DangerRegion[] = [
     affectedMillions: 19,
     severityLevel: 'Жоғары қауіпті (IPC 3–4 деңгейі)',
     primaryDrivers: ['Гиперинфляция', 'Тропикалық дауылдар', 'Ішкі тұрақсыздық'],
-    coordinates: { cx: 275, cy: 225, rx: 68, ry: 48 },
+    mapCenter: [17.0, -80.5],
+    mapZoom: 5,
+    accentHex: '#38bdf8',
     countryPins: [
-      { name: 'Гаити', x: 292, y: 214, acuteMillions: '5.4 млн', labelDx: 10, labelDy: -18 },
-      { name: 'Гватемала', x: 236, y: 226, acuteMillions: '4.3 млн', labelDx: -134, labelDy: -14 },
-      { name: 'Гондурас', x: 256, y: 244, acuteMillions: '2.6 млн', labelDx: 10, labelDy: 4 },
+      {
+        name: 'Гаити',
+        capital: 'Порт-о-Пренс',
+        lat: 18.5944,
+        lng: -72.3074,
+        acuteMillions: '5.4 млн',
+        ipcPhase: 'IPC 4–5 (Төтенше)',
+        mainDriver: 'Ішкі дағдарыс, инфляция және табиғи апаттар',
+        polygon: [
+          [19.9, -73.4],
+          [19.7, -71.7],
+          [18.0, -71.7],
+          [18.2, -74.4],
+          [18.6, -74.4],
+        ],
+      },
+      {
+        name: 'Гватемала',
+        capital: 'Гватемала',
+        lat: 14.6349,
+        lng: -90.5069,
+        acuteMillions: '4.3 млн',
+        ipcPhase: 'IPC 3 (Дағдарыс)',
+        mainDriver: 'Орталық Америка құрғақ дәлізіндегі қуаңшылық',
+        polygon: [
+          [17.8, -91.4],
+          [17.8, -89.1],
+          [15.7, -88.2],
+          [13.8, -90.1],
+          [14.5, -92.2],
+        ],
+      },
+      {
+        name: 'Гондурас',
+        capital: 'Тегусигальпа',
+        lat: 14.0723,
+        lng: -87.1921,
+        acuteMillions: '2.6 млн',
+        ipcPhase: 'IPC 3 (Дағдарыс)',
+        mainDriver: 'Тропикалық дауылдар және егістіктің жойылуы',
+        polygon: [
+          [15.9, -88.2],
+          [16.0, -83.1],
+          [14.0, -83.2],
+          [13.0, -87.0],
+          [14.4, -89.3],
+        ],
+      },
     ],
   },
 ];
